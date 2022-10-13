@@ -4,10 +4,10 @@ import tkinter as tk
 root = tk.Tk()
 root.geometry('1280x720')
 root.configure(bg='#856ff8')
-root.title('FACIAL DETECTION IN A MULTIMODAL BACKGROUND FOR REAL-TIME IMAGES')
+root.title('FACIAL DETECTION IN REALTIME FOR MISSING PERSON')
 svalue = tk.StringVar()  # defines the widget state as string
 
-message = tk.Label(root, text="FACIAL DETECTION IN A MULTIMODAL BACKGROUND FOR REAL-TIME IMAGES", bg="#80BFFF", fg="black", width=100,
+message = tk.Label(root, text="FACIAL DETECTION IN REALTIME FOR MISSING PERSON", bg="#80BFFF", fg="black", width=100,
                    height=5, font=('times', 20, 'italic bold '))
 message.pack(padx=10, pady=10)
 

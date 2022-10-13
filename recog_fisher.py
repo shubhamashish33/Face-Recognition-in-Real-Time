@@ -2,6 +2,8 @@ import numpy as np
 import cv2
 import sys
 import os
+import csv
+from datetime import datetime
 
 RESIZE_FACTOR = 4
 
@@ -59,11 +61,22 @@ class RecogFisherFaces:
             face = gray[y:y+h, x:x+w]
             face_resized = cv2.resize(face, (resized_width, resized_height))
             confidence = self.model.predict(face_resized)
-            print(confidence)
+            # print(confidence)
             if confidence[1]<100:
                 person = self.names[confidence[0]]
                 cv2.rectangle(frame, (x,y), (x+w, y+h), (255, 0, 0), 3)
-                cv2.putText(frame, "%s - %.0f%%" % (person, 100-(confidence[1])//100), (x-10, y-10), cv2.FONT_HERSHEY_PLAIN,2,(0, 255, 0),2)
+                cv2.putText(frame, "%s - %.0f%%" % (person, 100-(confidence[1])), (x-10, y-10), cv2.FONT_HERSHEY_PLAIN,2,(0, 255, 0),2)
+                # For showing 100% use "100-(confidence[1])//100" without quotes
+
+                # Added report genration
+                now = datetime.now()
+                cuurent_time = now.strftime("%H:%M:%S")
+                curentdate = now.strftime("%d/%m/%Y")
+                f = open("report/details.csv", 'a', newline='')
+                lnwriter = csv.writer(f)
+                lnwriter.writerow([person, curentdate, cuurent_time])
+                f.close()
+                print(confidence , person, cuurent_time, curentdate)
             else:
                 person = 'Unknown'
                 cv2.rectangle(frame, (x,y), (x+w, y+h), (0, 0, 255), 3)
