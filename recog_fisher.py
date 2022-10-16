@@ -65,7 +65,7 @@ class RecogFisherFaces:
             if confidence[1]<100:
                 person = self.names[confidence[0]]
                 cv2.rectangle(frame, (x,y), (x+w, y+h), (255, 0, 0), 3)
-                cv2.putText(frame, "%s - %.0f%%" % (person, 100-(confidence[1])), (x-10, y-10), cv2.FONT_HERSHEY_PLAIN,2,(0, 255, 0),2)
+                cv2.putText(frame, "%s - %.0f%%" % (person, (confidence[1])), (x-10, y-10), cv2.FONT_HERSHEY_PLAIN,2,(0, 255, 0),2)
                 # For showing 100% use "100-(confidence[1])//100" without quotes
 
                 # Added report genration
