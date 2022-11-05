@@ -79,7 +79,7 @@ class RecogFisherFaces:
                 cuurent_time = now.strftime("%H:%M:%S ")
                 curentdate = now.strftime("%d/%m/%Y")
                 if self.count > 50:
-                    print(confidence, person, cuurent_time, curentdate) 
+                    print(confidence, person, cuurent_time, curentdate)
                     f = open("report/details.csv", 'a', newline='')
                     lnwriter = csv.writer(f)
                     lnwriter.writerow([person, curentdate, cuurent_time])
@@ -87,10 +87,12 @@ class RecogFisherFaces:
                     toast = Notification(
                         app_id="Alert", title=f"{person.upper()} Found", msg=f"At {curentdate, cuurent_time}", duration="short")
                     toast.set_audio(audio.Default, loop=False)
-                    playsound("C:/Users/Shubham Ashish/Desktop/Files/face-recognition/alert.mp3")
+                    playsound(
+                        "C:/Users/Shubham Ashish/Desktop/Files/face-recognition/alert.mp3")
                     toast.show()
                     self.count = 0
             else:
+                self.count = 0
                 person = 'Unknown'
                 cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 0, 255), 3)
                 cv2.putText(frame, (person), (x-10, y-10),
