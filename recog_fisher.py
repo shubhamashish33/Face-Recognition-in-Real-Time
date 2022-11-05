@@ -5,7 +5,7 @@ import os
 import csv
 from datetime import datetime
 from winotify import Notification, audio
-
+from playsound import playsound
 RESIZE_FACTOR = 4
 
 
@@ -78,8 +78,8 @@ class RecogFisherFaces:
                 now = datetime.now()
                 cuurent_time = now.strftime("%H:%M:%S ")
                 curentdate = now.strftime("%d/%m/%Y")
-                print(confidence, person, cuurent_time, curentdate)
                 if self.count > 50:
+                    print(confidence, person, cuurent_time, curentdate) 
                     f = open("report/details.csv", 'a', newline='')
                     lnwriter = csv.writer(f)
                     lnwriter.writerow([person, curentdate, cuurent_time])
@@ -87,6 +87,7 @@ class RecogFisherFaces:
                     toast = Notification(
                         app_id="Alert", title=f"{person.upper()} Found", msg=f"At {curentdate, cuurent_time}", duration="short")
                     toast.set_audio(audio.Default, loop=False)
+                    playsound("C:/Users/Shubham Ashish/Desktop/Files/face-recognition/alert.mp3")
                     toast.show()
                     self.count = 0
             else:
